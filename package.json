@@ -1,20 +1,27 @@
 {
   "name": "event-management-api",
   "version": "1.0.0",
-  "description": "API para la gestión de eventos, desarrollada en Node.js con Express. Permite CRUD de eventos, registro de asistentes, y consulta de ubicaciones cercanas con Mapbox. Incluye autenticación JWT, manejo de archivos Excel, y Dockerización. Sigue principios de Clean Architecture para modularidad y escalabilidad.",
+  "description": "API for event management, developed in Node.js with Express. Allows CRUD of events, registration of attendees, and consultation of nearby locations with Mapbox. Includes JWT authentication, Excel file management, and Dockerization. Follows Clean Architecture principles for modularity and scalability.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon .",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "express": "^4.21.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
     "dotenv": "^16.4.5",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "jest": "^29.7.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4"
   }
