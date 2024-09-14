@@ -1,4 +1,4 @@
 module.exports = {
-    errorHandler: require("./errorHandler"),
-    core: require("./core"),
-}
+  errorHandler: require("./errorHandler.middleware"),
+  core: require("./core.middleware"),
+};
