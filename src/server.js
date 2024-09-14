@@ -1,14 +1,14 @@
 const express = require("express");
 const config = require("./config");
 const { core, errorHandler } = require("./middlewares");
+const { eventsRoutes, usersRoutes } = require("./routes");
 
 const app = express();
 
 core(app);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/api/events", eventsRoutes);
+app.use("/api/users", usersRoutes);
 
 app.use(errorHandler);
 
