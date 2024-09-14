@@ -12,6 +12,8 @@ Esta es una API para la gestión de eventos, desarrollada en Node.js con Express
 
 - **Node.js** v14.x o superior
 - **npm** o **yarn** para la gestión de dependencias
+- **PostgreSQL**: La base de datos utilizada es PostgreSQL.
+- **Git Bash (solo para Windows)**: Si estás en Windows y deseas ejecutar scripts Bash, asegúrate de tener instalado Git Bash [Descargar Git Bash](https://git-scm.com/).
 
 ## Instalación
 
@@ -31,37 +33,74 @@ cd event-management-api
 npm install
 ```
 
-4. Crea un archivo `.env` en la raíz del proyecto basándote en el .env.example
-
-## Uso
-
-Para ejecutar el proyecto en modo desarrollo:
+4. Crea un archivo `.env` en la raíz del proyecto basándote en el [.env.example](/event-management-api/.env.example)
 
 ```bash
-npm run dev
+cp .env.example .env
 ```
-Para ejecutar el proyecto en modo producción:
 
+## Configuración de la Base de Datos
+
+La API utiliza PostgreSQL como base de datos. Los scripts SQL para crear las tablas y poblar datos de ejemplo se encuentran en la carpeta db:
+
+- [schema.sql](/event-management-api/db/schema.sql) para la definición de las tablas.
+- [data.sql](/event-management-api/db/data.sql) para poblar la base de datos con datos iniciales.
+
+Se ha creado [este](/event-management-api/setup-db.sh) script que se encarga de ejecutarlos automáticamente.
+
+**Nota: Asegúrate de que PostgreSQL esté instalado en tu sistema.**
+
+### Linux/macOS
+Para ejecutar el script de configuración de la base de datos en sistemas Linux o macOS, utiliza el siguiente comando:
+
+```bash
+npm run setup-db-linux
+```
+
+### Windows
+Para ejecutar el script de configuración de la base de datos en Windows (utilizando Git Bash), usa el siguiente comando:
+
+```bash
+npm run setup-db-windows
+```
+
+**Nota: Asegúrate de que Git Bash esté instalado en tu sistema si estás utilizando Windows.**
+
+## Scripts disponibles
+### Inicia la aplicación
+#### En modo producción:
 ```bash
 npm start
 ```
-
-## Pruebas
-
-Para ejecutar las pruebas unitarias:
-
+#### En modo desarrollo con Nodemon:
+```bash
+npm run dev
+```
+### Test
+#### Ejecuta los test con Jest:
 ```bash
 npm test
 ```
-## Documentación
+### Base de datos
+#### Configura la base de datos en Linux o macOS:
+```bash
+npm run setup-db-linux
+```
+#### Configura la base de datos en Windows usando Git Bash:
+```bash
+npm run setup-db-windows
+```
+
+## Documentación Extra
 
 En la carpeta docs encontrarás material complementario como:
-- Diagrama ER en formato PNG.
+- [Diagrama ER en formato PNG](/event-management-api/docs/ER%20Diagram%20Event%20Managment.drawio.png).
 
 ## Estructura del proyecto
 
 ```bash
 /event-management-api
+  /db
   /docs             
   /src              
     /config         
