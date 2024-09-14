@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon .",
-    "test": "jest"
+    "test": "jest",
+    "setup-db-linux": "chmod +x ./setup-db.sh && bash ./setup-db.sh",
+    "setup-db-windows": "bash ./setup-db.sh"
   },
   "keywords": [],
   "author": "",
