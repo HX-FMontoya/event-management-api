@@ -1,22 +1,17 @@
 const { pool } = require("../../db/db_conexion");
-const {
-  getAll,
-  getById,
-  create,
-  update,
-  deleteById,
-} = require("../../db/queries/users");
+const { user } = require("../../db/queries");
+const { genericCatcher } = require("../utils/catchers");
 
 module.exports = {
-  getAllUsers: async () => {
-    const { rows } = await pool.query(getAll);
+  getAll: genericCatcher(async () => {
+    const { rows } = await pool.query(user.getAll);
     return rows;
-  },
-  getUserById: async (id) => {
-    const { rows } = await pool.query(getById, [id]);
+  }),
+  getById: genericCatcher(async (id) => {
+    const { rows } = await pool.query(user.getById, [id]);
     return rows[0];
-  },
-  createUser: async (userData) => {
+  }),
+  create: genericCatcher(async (userData) => {
     const values = [
       userData.name,
       userData.email,
@@ -24,10 +19,10 @@ module.exports = {
       userData.status,
       userData.profile_image_url,
     ];
-    const { rows } = await pool.query(create, values);
+    const { rows } = await pool.query(user.create, values);
     return rows[0];
-  },
-  updateUser: async (id, userData) => {
+  }),
+  update: genericCatcher(async (id, userData) => {
     const values = [
       userData.name,
       userData.email,
@@ -36,11 +31,11 @@ module.exports = {
       userData.profile_image_url,
       id,
     ];
-    const { rows } = await pool.query(update, values);
+    const { rows } = await pool.query(user.update, values);
     return rows[0];
-  },
-  deleteUser: async (id) => {
-    const { rowCount, rows } = await pool.query(deleteById, [id]);
+  }),
+  deleteById: genericCatcher(async (id) => {
+    const { rowCount, rows } = await pool.query(user.deleteById, [id]);
     return rowCount === 1 && rows[0];
-  },
+  }),
 };

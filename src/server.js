@@ -1,7 +1,7 @@
 const express = require("express");
 const config = require("./config");
 const { core, errorHandler } = require("./middlewares");
-const { eventsRoutes, usersRoutes } = require("./routes");
+const { eventsRoutes, usersRoutes, ticketsRoutes, attendersRoutes } = require("./routes");
 
 const app = express();
 
@@ -9,6 +9,8 @@ core(app);
 
 app.use("/api/events", eventsRoutes);
 app.use("/api/users", usersRoutes);
+app.use("/api/tickets", ticketsRoutes);
+app.use("/api/attenders", attendersRoutes);
 
 app.use(errorHandler);
 
