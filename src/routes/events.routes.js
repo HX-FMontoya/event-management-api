@@ -1,17 +1,17 @@
 const router = require("express").Router();
 const {
-  getAllEvents,
-  createEvent,
-  getEventById,
-  updateEvent,
-  deleteEvent,
+  getAll,
+  create,
+  getById,
+  update,
+  deleteById,
 } = require("../controllers/events.controller");
 const { validateEvent } = require("../middlewares/validations.moddleware")
 
-router.get("/", getAllEvents);
-router.post("/", validateEvent, createEvent);
-router.get("/:id", getEventById);
-router.put("/:id", validateEvent, updateEvent);
-router.delete("/:id", deleteEvent);
+router.get("/", getAll);
+router.post("/", validateEvent, create);
+router.get("/:id", getById);
+router.put("/:id", validateEvent, update);
+router.delete("/:id", deleteById);
 
 module.exports = router;
