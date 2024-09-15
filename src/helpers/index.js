@@ -1,4 +1,7 @@
+const { genericCatcher } = require("../utils/catchers");
+
 module.exports = {
-  findOrCreateUser: require("./findOrCreateUser"),
-  findOrCreateLocation: require("./findOrCreateLocation"),
+  findOrCreateUser: genericCatcher(require("./findOrCreateUser")),
+  findOrCreateLocation: genericCatcher(require("./findOrCreateLocation")),
+  findOrCreateCity: genericCatcher(require("./findOrCreateCity")),
 };

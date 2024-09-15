@@ -1,15 +1,18 @@
 const { pool } = require("../../db/db_conexion");
 const {
-  findLocationByNameAndAddress,
+  findLocationByNameAddressAndCity,
   createLocation,
 } = require("../../db/queries/locations");
+const findOrCreateCity = require("./findOrCreateCity");
 
 module.exports = async (locationData) => {
-  const { name, address } = locationData;
+  const { name, address, city } = locationData;
+
+  const cityId = await findOrCreateCity(city);
 
   const { rows: existingLocations } = await pool.query(
-    findLocationByNameAndAddress,
-    [name, address]
+    findLocationByNameAddressAndCity,
+    [name, address, cityId]
   );
 
   if (existingLocations.length > 0) {
@@ -19,7 +22,7 @@ module.exports = async (locationData) => {
   const newLocationValues = [
     name,
     address,
-    locationData.city,
+    cityId,
     locationData.latitude,
     locationData.longitude,
     locationData.image_url,
