@@ -2,35 +2,35 @@ const { eventsService } = require("../services");
 const { catcherController } = require("../utils/catchers");
 
 module.exports = {
-  getAllEvents: catcherController(async (req, res) => {
-    const events = await eventsService.getAllEvents();
+  getAll: catcherController(async (req, res) => {
+    const events = await eventsService.getAll();
     res.status(200).json(events);
   }),
-  getEventById: catcherController(async (req, res) => {
+  getById: catcherController(async (req, res) => {
     const { id } = req.params;
-    const event = await eventsService.getEventById(id);
+    const event = await eventsService.getById(id);
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
     res.status(200).json(event);
   }),
-  createEvent: catcherController(async (req, res) => {
+  create: catcherController(async (req, res) => {
     const eventData = req.body;
-    const newEvent = await eventsService.createEvent(eventData);
+    const newEvent = await eventsService.create(eventData);
     res.status(201).json(newEvent);
   }),
-  updateEvent: catcherController(async (req, res) => {
+  update: catcherController(async (req, res) => {
     const { id } = req.params;
     const eventData = req.body;
-    const updatedEvent = await eventsService.updateEvent(id, eventData);
+    const updatedEvent = await eventsService.update(id, eventData);
     if (!updatedEvent) {
       return res.status(404).json({ message: "Event not found" });
     }
     res.status(200).json(updatedEvent);
   }),
-  deleteEvent: catcherController(async (req, res) => {
+  deleteById: catcherController(async (req, res) => {
     const { id } = req.params;
-    const deletedEvent = await eventsService.deleteEvent(id);
+    const deletedEvent = await eventsService.deleteById(id);
     if (!deletedEvent) {
       return res.status(404).json({ message: "Event not found" });
     }

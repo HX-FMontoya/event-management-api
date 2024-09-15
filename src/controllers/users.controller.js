@@ -2,35 +2,35 @@ const { usersService } = require("../services");
 const { catcherController } = require("../utils/catchers");
 
 module.exports = {
-  getAllUsers: catcherController(async (req, res) => {
-    const users = await usersService.getAllUsers();
+  getAll: catcherController(async (req, res) => {
+    const users = await usersService.getAll();
     res.status(200).json(users);
   }),
-  getUserById: catcherController(async (req, res) => {
+  getById: catcherController(async (req, res) => {
     const { id } = req.params;
-    const user = await usersService.getUserById(id);
+    const user = await usersService.getById(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   }),
-  createUser: catcherController(async (req, res) => {
+  create: catcherController(async (req, res) => {
     const userData = req.body;
-    const newUser = await usersService.createUser(userData);
+    const newUser = await usersService.create(userData);
     res.status(201).json(newUser);
   }),
-  updateUser: catcherController(async (req, res) => {
+  update: catcherController(async (req, res) => {
     const { id } = req.params;
     const userData = req.body;
-    const updatedUser = await usersService.updateUser(id, userData);
+    const updatedUser = await usersService.update(id, userData);
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(updatedUser);
   }),
-  deleteUser: catcherController(async (req, res) => {
+  deleteById: catcherController(async (req, res) => {
     const { id } = req.params;
-    const deletedUser = await usersService.deleteUser(id);
+    const deletedUser = await usersService.deleteById(id);
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found" });
     }
