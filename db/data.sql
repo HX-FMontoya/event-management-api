@@ -1,5 +1,10 @@
 SET client_encoding TO 'UTF8';
 
+INSERT INTO cities (name) VALUES
+('Buenos Aires'),
+('Quito'),
+('Ciudad de México');
+
 INSERT INTO users (name, email, role, status, profile_image_url) VALUES
 ('Carlos Pérez', 'carlos.perez@example.com', 'admin', 'active', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnF-fG9GQERKTlnDx8atIGYF2jtqDydMeLhw&s'),
 ('María García', 'maria.garcia@example.com', 'user', 'active', 'https://hablemos-escritoras-as.s3.us-west-1.amazonaws.com/variants/cxuqm7ccayha0k85mr3zd1eouuk7/836ba6b7667eb9d5cbcf09d906649eecfddabb3e79f19d0398832407f50dee4f'),
@@ -11,9 +16,9 @@ INSERT INTO credentials (user_id, password_hash, reset_token, last_login_at) VAL
 (3, '$2y$12$e4nZ6QsF/JFp7HbImbBhTOgnKQx2NRBRbkdTzAf8C3jKL/e4oY7Ni', NULL, '2024-09-12 14:21:10');
 
 INSERT INTO locations (name, address, city, latitude, longitude, image_url) VALUES
-('Centro de Convenciones Buenos Aires', 'Avenida 9 de Julio 123', 'Buenos Aires', -34.6037, -58.3816, 'https://images.mnstatic.com/64/97/6497e6819831d8310157b14b0a3b3270.jpg'),
-('Parque La Carolina', 'Av. De los Shyris y Av. Eloy Alfaro', 'Quito', -0.1807, -78.4678, 'https://www.quitoinforma.gob.ec/wp-content/uploads/2022/11/315974994_440783791565861_727850013211603165_n-1-e1668703928726-800x445.jpg'),
-('Auditorio Nacional', 'Paseo de la Reforma 50', 'Ciudad de México', 19.4326, -99.1332, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/CDMX_-_Paseo_de_la_Reforma.jpg/640px-CDMX_-_Paseo_de_la_Reforma.jpg');
+('Centro de Convenciones Buenos Aires', 'Avenida 9 de Julio 123', 1, -34.6037, -58.3816, 'https://images.mnstatic.com/64/97/6497e6819831d8310157b14b0a3b3270.jpg'),
+('Parque La Carolina', 'Av. De los Shyris y Av. Eloy Alfaro', 2, -0.1807, -78.4678, 'https://www.quitoinforma.gob.ec/wp-content/uploads/2022/11/315974994_440783791565861_727850013211603165_n-1-e1668703928726-800x445.jpg'),
+('Auditorio Nacional', 'Paseo de la Reforma 50', 3, 19.4326, -99.1332, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/CDMX_-_Paseo_de_la_Reforma.jpg/640px-CDMX_-_Paseo_de_la_Reforma.jpg');
 
 INSERT INTO events (created_by, location, title, description, start_date, end_date, status, image_url) VALUES
 (3, 1, 'Conferencia de Innovación Tecnológica', 'Un evento sobre las últimas tendencias tecnológicas en Latinoamérica.', '2024-10-01 09:00', '2024-10-01 18:00', 'scheduled', 'https://www.linqto.com/wp-content/uploads/2024/02/AI-in-daily-life.webp'),

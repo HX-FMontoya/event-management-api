@@ -1,3 +1,22 @@
+CREATE TABLE cities(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE locations (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  address TEXT NOT NULL,
+  city INT REFERENCES cities(id),
+  latitude DECIMAL(10, 8),
+  longitude DECIMAL(11, 8),
+  image_url VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TYPE user_role AS ENUM ('admin', 'user', 'organizer');
 
 CREATE TABLE users (
@@ -7,18 +26,6 @@ CREATE TABLE users (
   role user_role NOT NULL,
   status VARCHAR(50) DEFAULT 'active' CHECK (status IN ('active', 'inactive', 'suspended')),
   profile_image_url VARCHAR(255),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE locations (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  address TEXT,
-  city VARCHAR(100),
-  latitude DECIMAL(10, 8),
-  longitude DECIMAL(11, 8),
-  image_url VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
