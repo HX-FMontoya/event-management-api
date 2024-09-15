@@ -12,8 +12,9 @@ class Config {
     this.#db = {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
-      pass: process.env.DB_PASS,
-      name: process.env.DB_NAME,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      port: process.env.DB_PORT,
     };
     this.#jwt = {
       secret: process.env.JWT_SECRET,

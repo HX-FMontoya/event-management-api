@@ -6,7 +6,7 @@ else
 fi
 
 echo "Creating $DB_NAME database..."
-PGPASSWORD=$DB_PASS psql -U $DB_USER -h $DB_HOST -c "CREATE DATABASE $DB_NAME;" || echo "Database already exist."
+PGPASSWORD=$DB_PASS psql -U $DB_USER -h $DB_HOST -c "CREATE DATABASE $DB_NAME" || echo "Database already exists."
 
 echo "Running schema.sql..."
 PGPASSWORD=$DB_PASS psql -U $DB_USER -h $DB_HOST -d $DB_NAME -f $SCHEMA_FILE
