@@ -26,7 +26,7 @@ CREATE TABLE locations (
 CREATE TABLE events (
   id SERIAL PRIMARY KEY,
   created_by INT REFERENCES users(id),
-  location_id INT REFERENCES locations(id),
+  location INT REFERENCES locations(id),
   title VARCHAR(255) NOT NULL,
   description TEXT,
   start_date TIMESTAMP,
