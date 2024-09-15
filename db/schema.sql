@@ -9,7 +9,7 @@ CREATE TABLE locations (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   address TEXT NOT NULL,
-  city INT REFERENCES cities(id),
+  city_id INT REFERENCES cities(id),
   latitude DECIMAL(10, 8),
   longitude DECIMAL(11, 8),
   image_url VARCHAR(255),
@@ -33,7 +33,7 @@ CREATE TABLE users (
 CREATE TABLE events (
   id SERIAL PRIMARY KEY,
   created_by INT REFERENCES users(id),
-  location INT REFERENCES locations(id),
+  location_id INT REFERENCES locations(id),
   title VARCHAR(255) NOT NULL,
   description TEXT,
   start_date TIMESTAMP,
@@ -52,8 +52,8 @@ CREATE TABLE tickets (
   user_id INT REFERENCES users(id) ON DELETE CASCADE,
   ticket_type ticket_type NOT NULL,
   price DECIMAL(10, 2),
-  purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status VARCHAR(50) DEFAULT 'reserved' CHECK (status IN ('reserved', 'paid', 'cancelled', 'refunded')),
+  purchase_date TIMESTAMP,
+  status VARCHAR(50) DEFAULT 'created' CHECK (status IN ('created','reserved', 'paid', 'cancelled', 'refunded')),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

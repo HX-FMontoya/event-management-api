@@ -1,13 +1,41 @@
 module.exports = {
-  findLocationByNameAddressAndCity: `SELECT l.*, 
-    row_to_json(c) AS city
-    FROM locations l
-    JOIN cities c ON l.city = c.id
-    WHERE l.name = $1
-    AND l.address = $2
-    AND c.id = $3;`,
-  createLocation: `INSERT INTO locations 
-  (name, address, city, latitude, longitude, image_url)
-  VALUES ($1, $2, $3, $4, $5, $6)
-  RETURNING id;`,
+  findLocationByNameAddressAndCity: (buildQuery) =>
+    buildQuery({
+      type: "select",
+      tableName: "locations l",
+      columns: [
+        "l.id",
+        "l.name",
+        "l.address",
+        "l.latitude",
+        "l.longitude",
+        "l.image_url",
+        "row_to_json(c) AS city",
+      ],
+      joins: [
+        { type: "INNER", table: "cities c", condition: "l.city_id = c.id" },
+      ],
+      conditions: ["l.name = $1", "l.address = $2", "c.id = $3"],
+    }),
+  createLocation: (buildQuery) =>
+    buildQuery({
+      type: "insert",
+      tableName: "locations",
+      columns: [
+        "name",
+        "address",
+        "city_id",
+        "latitude",
+        "longitude",
+        "image_url",
+      ],
+      values: [
+        "name",
+        "address",
+        "city_id",
+        "latitude",
+        "longitude",
+        "image_url",
+      ],
+    }),
 };
