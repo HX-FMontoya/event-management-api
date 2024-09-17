@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   getAll,
   create,
+  upload,
   getById,
   update,
   deleteById,
@@ -11,11 +12,13 @@ const {
   auth,
   verifyWhoModifiesEvent,
   validations,
+  upload: uploadMiddleWare,
 } = require("../middlewares");
 const { validateEvent } = validations;
 
 router.get("/", getAll);
 router.post("/", auth, verifyAdminOrOrganizer, validateEvent, create);
+router.post("/upload", auth, verifyAdminOrOrganizer, uploadMiddleWare, upload);
 router.get("/:id", getById);
 router.put(
   "/:id",

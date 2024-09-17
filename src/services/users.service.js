@@ -13,6 +13,11 @@ module.exports = {
     return rows[0];
   },
 
+  findByEmail: async (email) => {
+    const { rows } = await pool.query(user.findByEmail, [email]);
+    return rows[0];
+  },
+
   create: async (userData) => {
     const hashedPassword = await hashPassword(userData.password);
 

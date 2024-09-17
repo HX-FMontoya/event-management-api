@@ -12,5 +12,6 @@ module.exports = {
   verifyWhoModifiesUser: require("./permissions/verify/whoModify/verifyWhoModifiesUser.middleware.js"),
   verifyWhoModifiesAssistant: require("./permissions/verify/whoModify/verifyWhoModifiesAssistant.middleware.js"),
   validateDaysForReservation: require("./validations/reservation/validateDaysForReservation.middleware.js"),
-  verifyResource: require("./permissions/verify/verifyResource.middleware.js")
+  verifyResource: require("./permissions/verify/verifyResource.middleware.js"),
+  upload: require("./events/upload.middleware.js")
 };
