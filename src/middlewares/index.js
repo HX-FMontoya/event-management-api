@@ -1,5 +1,15 @@
 module.exports = {
   errorHandler: require("./errorHandler.middleware"),
   core: require("./core.middleware"),
-  validations: require("./validations.moddleware")
+  validations: require("./validations.middleware"),
+  auth: require("./auth.middleware"),
+  verifyAdmin: require("./verifyAdmin.middleware"),
+  verifyOrganizer: require("./verifyOrganizer.middleware"),
+  verifyAdminOrOrganizer: require("./verifyAdminOrOrganizer.middleware"),
+  checkPermission: require("./checkPermission.middleware.js"),
+  checkToken: require("./checkToken.middleware.js"),
+  verifyWhoModifiesEvent: require("./verifyWhoModifiesEvent.middleware.js"),
+  verifyWhoModifiesUser: require("./verifyWhoModifiesUser.middleware.js"),
+  verifyWhoModifiesAssistant: require("./verifyWhoModifiesAssistant.middleware.js"),
+  validateDaysForReservation: require("./validateDaysForReservation.middleware.js"),
 };
