@@ -1,16 +1,25 @@
 const express = require("express");
 const config = require("./config");
 const { core, errorHandler } = require("./middlewares");
-const { eventsRoutes, usersRoutes, ticketsRoutes, attendersRoutes } = require("./routes");
+const {
+  authRoutes,
+  eventsRoutes,
+  usersRoutes,
+  ticketsRoutes,
+  attendersRoutes,
+  reservationsRoutes,
+} = require("./routes");
 
 const app = express();
 
 core(app);
 
+app.use("/api/auth", authRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/tickets", ticketsRoutes);
 app.use("/api/attenders", attendersRoutes);
+app.use("/api/reservations", reservationsRoutes);
 
 app.use(errorHandler);
 
