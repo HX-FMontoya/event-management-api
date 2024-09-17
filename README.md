@@ -124,6 +124,8 @@ npm run setup-db-windows
 
 En la carpeta docs encontrarás material complementario como:
 - [Diagrama ER en formato PNG](/event-management-api/docs/ER%20Diagram%20Event%20Managment.drawio.png).
+- [Plantilla-excel](/event-management-api/docs/event_template_with_user_data.ods)
+- [Video](https://drive.google.com/file/d/1elfU99JPnlOE6quCQetKSzrhnG7mzOYo/view?usp=drive_link)
 
 ## Estructura del proyecto
 
