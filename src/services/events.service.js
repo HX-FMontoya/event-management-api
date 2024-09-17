@@ -1,18 +1,17 @@
 const { pool } = require("../../db/db_conexion");
 const { event } = require("../../db/queries");
-const { findOrCreateUser, findOrCreateLocation } = require("../helpers");
-const { genericCatcher } = require("../utils/catchers");
+const { findOrCreateLocation } = require("../helpers");
 
 module.exports = {
-  getAll: genericCatcher(async () => {
+  getAll: async () => {
     const { rows } = await pool.query(event.getAll);
     return rows;
-  }),
-  getById: genericCatcher(async (id) => {
+  },
+  getById: async (id) => {
     const { rows } = await pool.query(event.getById, [id]);
     return rows[0];
-  }),
-  create: genericCatcher(async (eventData) => {
+  },
+  create: async (eventData) => {
     const {
       title,
       description,
@@ -24,7 +23,6 @@ module.exports = {
       image_url,
     } = eventData;
 
-    const userId = await findOrCreateUser(created_by, "organizer");
     const locationId = await findOrCreateLocation(location);
 
     const values = [
@@ -33,16 +31,18 @@ module.exports = {
       start_date,
       end_date,
       status,
-      userId,
+      created_by,
       locationId,
       image_url,
     ];
 
     const { rows: createdEvent } = await pool.query(event.create, values);
-    const { rows: fullEvent } = await pool.query(event.getById, [createdEvent[0].id]);
+    const { rows: fullEvent } = await pool.query(event.getById, [
+      createdEvent[0].id,
+    ]);
     return fullEvent[0];
-  }),
-  update: genericCatcher(async (id, eventData) => {
+  },
+  update: async (id, eventData) => {
     const {
       created_by,
       location,
@@ -54,7 +54,6 @@ module.exports = {
       image_url,
     } = eventData;
 
-    const userId = await findOrCreateUser(created_by);
     const locationId = await findOrCreateLocation(location);
 
     const values = [
@@ -63,17 +62,19 @@ module.exports = {
       start_date,
       end_date,
       status,
-      userId,
+      created_by,
       locationId,
       image_url,
       id,
     ];
     const { rows: updatedEvent } = await pool.query(event.update, values);
-    const { rows: fullEvent } = await pool.query(event.getById, [updatedEvent[0].id]);
+    const { rows: fullEvent } = await pool.query(event.getById, [
+      updatedEvent[0].id,
+    ]);
     return fullEvent[0];
-  }),
-  delete: genericCatcher(async (id) => {
+  },
+  deleteById: async (id) => {
     const { rowCount, rows } = await pool.query(event.deleteById, [id]);
     return rowCount === 1 && rows[0];
-  }),
+  },
 };
