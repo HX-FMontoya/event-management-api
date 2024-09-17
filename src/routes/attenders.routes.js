@@ -5,6 +5,7 @@ const {
   getById,
   update,
   deleteById,
+  getAttendersPerDay,
 } = require("../controllers/attenders.controller");
 const {
   verifyAdmin,
@@ -23,6 +24,13 @@ router.get(
   verifyAdminOrOrganizer,
   verifyWhoModifiesAssistant,
   getAll
+);
+router.get(
+  "/byDay",
+  auth,
+  verifyAdminOrOrganizer,
+  verifyWhoModifiesAssistant,
+  getAttendersPerDay
 );
 router.post(
   "/",

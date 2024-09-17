@@ -1,5 +1,6 @@
 const { attendersService } = require("../services");
 const { catcherController } = require("../utils/catchers");
+const { calculateAttendersPerDay } = require("../helpers");
 
 module.exports = {
   getAll: catcherController(async (req, res) => {
@@ -19,6 +20,18 @@ module.exports = {
       return res.status(404).json({ message: "Attender not found" });
     }
     res.status(200).json(attender);
+  }),
+
+  getAttendersPerDay: catcherController(async (req, res) => {
+    const { eventId } = req.query;
+    let attenders;
+    if (eventId) {
+      attenders = await attendersService.getAllByEventId(eventId);
+    } else {
+      attenders = await attendersService.getAll();
+    }
+    const attendeesPerDay = calculateAttendersPerDay(attenders);
+    res.status(200).json(attendeesPerDay);
   }),
 
   create: catcherController(async (req, res) => {
