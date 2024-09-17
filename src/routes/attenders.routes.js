@@ -1,17 +1,19 @@
 const router = require("express").Router();
 const {
-    getAll,
-    create,
-    getById,
-    update,
-    deleteById,
+  getAll,
+  create,
+  getById,
+  update,
+  deleteById,
 } = require("../controllers/attenders.controller");
-const { validateAttender } = require("../middlewares/validations.moddleware");
+const { validateAttender } = require("../middlewares/validations.middleware");
+const auth = require("../middlewares/auth.middleware");
+const { verifyAdmin, verifyWhoModifiesAssistant, verifyAdminOrOrganizer } = require("../middlewares");
 
-router.get("/", getAll);
-router.post("/", validateAttender, create);
-router.get("/:id", getById);
-router.put("/:id", validateAttender, update);
-router.delete("/:id", deleteById);
+router.get("/", auth, verifyAdminOrOrganizer, verifyWhoModifiesAssistant, getAll);
+router.post("/", auth, validateAttender, create);
+router.get("/:id", auth, verifyWhoModifiesAssistant, getById);
+router.put("/:id", auth, verifyWhoModifiesAssistant, validateAttender, update);
+router.delete("/:id", auth, verifyAdmin, deleteById);
 
 module.exports = router;
