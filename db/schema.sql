@@ -45,6 +45,15 @@ CREATE TABLE events (
 );
 
 CREATE TYPE ticket_type AS ENUM ('VIP', 'General');
+CREATE TYPE day_of_week AS ENUM (
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday'
+);
 
 CREATE TABLE tickets (
   id SERIAL PRIMARY KEY,
@@ -52,7 +61,8 @@ CREATE TABLE tickets (
   user_id INT REFERENCES users(id) ON DELETE CASCADE,
   ticket_type ticket_type NOT NULL,
   price DECIMAL(10, 2),
-  purchase_date TIMESTAMP,
+  purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  enabled_days day_of_week[],
   status VARCHAR(50) DEFAULT 'created' CHECK (status IN ('created','reserved', 'paid', 'cancelled', 'refunded')),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
