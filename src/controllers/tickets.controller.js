@@ -18,7 +18,11 @@ module.exports = {
 
   create: catcherController(async (req, res) => {
     const ticketData = req.body;
-    const newTicket = await ticketsService.create(ticketData);
+    const { id } = req.user;
+    const newTicket = await ticketsService.create({
+      ...ticketData,
+      user_id: id,
+    });
     res.status(201).json(newTicket);
   }),
 

@@ -16,13 +16,21 @@ module.exports = {
   }),
   create: catcherController(async (req, res) => {
     const eventData = req.body;
-    const newEvent = await eventsService.create(eventData);
+    const { id } = req.user;
+    const newEvent = await eventsService.create({
+      ...eventData,
+      created_by: id,
+    });
     res.status(201).json(newEvent);
   }),
   update: catcherController(async (req, res) => {
     const { id } = req.params;
     const eventData = req.body;
-    const updatedEvent = await eventsService.update(id, eventData);
+    const { id: idUser } = req.user;
+    const updatedEvent = await eventsService.update(id, {
+      ...eventData,
+      created_by: idUser,
+    });
     if (!updatedEvent) {
       return res.status(404).json({ message: "Event not found" });
     }

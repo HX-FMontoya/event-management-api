@@ -14,11 +14,6 @@ module.exports = {
     }
     res.status(200).json(user);
   }),
-  create: catcherController(async (req, res) => {
-    const userData = req.body;
-    const newUser = await usersService.create(userData);
-    res.status(201).json(newUser);
-  }),
   update: catcherController(async (req, res) => {
     const { id } = req.params;
     const userData = req.body;

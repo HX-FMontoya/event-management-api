@@ -3,6 +3,11 @@ const { catcherController } = require("../utils/catchers");
 
 module.exports = {
   getAll: catcherController(async (req, res) => {
+    const { eventId } = req.query;
+    if (eventId) {
+      const attenders = await attendersService.getAllByEventId(eventId);
+      return res.status(200).json(attenders);
+    }
     const attenders = await attendersService.getAll();
     res.status(200).json(attenders);
   }),
@@ -25,10 +30,7 @@ module.exports = {
   update: catcherController(async (req, res) => {
     const { id } = req.params;
     const attenderData = req.body;
-    const updatedAttender = await attendersService.update(
-      id,
-      attenderData
-    );
+    const updatedAttender = await attendersService.update(id, attenderData);
     if (!updatedAttender) {
       return res.status(404).json({ message: "Attender not found" });
     }
