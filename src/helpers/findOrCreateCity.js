@@ -1,5 +1,5 @@
-const { pool } = require("../../db/db_conexion");
-const { city } = require("../../db/queries");
+const { pool } = require("../infrastructure/db_conexion");
+const { city } = require("../infrastructure/queries");
 
 module.exports = async (cityName) => {
   const { rows: existingCities } = await pool.query(city.findCityByName, [

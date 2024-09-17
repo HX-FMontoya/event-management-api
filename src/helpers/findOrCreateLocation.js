@@ -1,5 +1,5 @@
-const { pool } = require("../../db/db_conexion");
-const { location } = require("../../db/queries");
+const { pool } = require("../infrastructure/db_conexion");
+const { location } = require("../infrastructure/queries");
 const findOrCreateCity = require("./findOrCreateCity");
 
 module.exports = async (locationData) => {
