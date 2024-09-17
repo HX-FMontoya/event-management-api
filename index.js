@@ -1,5 +1,5 @@
 const server = require("./src/server");
-const { conexion } = require("./db/db_conexion");
+const { conexion } = require("./src/infrastructure/db_conexion");
 
 conexion()
   .then(() => {
