@@ -1,0 +1,40 @@
+version: "3"
+services:
+  app:
+    build: .
+    container_name: event-management-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DB_HOST=db
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - SCHEMA_FILE=${SCHEMA_FILE}
+      - DATA_FILE=${DATA_FILE}
+    depends_on:
+      - db
+    networks:
+      - backend
+
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
