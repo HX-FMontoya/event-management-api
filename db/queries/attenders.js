@@ -4,7 +4,8 @@ module.exports = {
       type: "select",
       tableName: "attenders a",
       columns: [
-        "a.*",
+        "a.id",
+        "a.status",
         "row_to_json(u) AS user",
         "row_to_json(e) AS event",
         "row_to_json(t) AS ticket",
@@ -15,12 +16,31 @@ module.exports = {
         { type: "INNER", table: "tickets t", condition: "a.ticket_id = t.id" },
       ],
     }),
+  getAllByEventId: (buildQuery) =>
+    buildQuery({
+      type: "select",
+      tableName: "attenders a",
+      columns: [
+        "a.id",
+        "a.status",
+        "row_to_json(u) AS user",
+        "row_to_json(e) AS event",
+        "row_to_json(t) AS ticket",
+      ],
+      joins: [
+        { type: "INNER", table: "users u", condition: "a.user_id = u.id" },
+        { type: "INNER", table: "events e", condition: "a.event_id = e.id" },
+        { type: "INNER", table: "tickets t", condition: "a.ticket_id = t.id" },
+      ],
+      conditions: ["a.event_id = $1"],
+    }),
   getById: (buildQuery) =>
     buildQuery({
       type: "select",
       tableName: "attenders a",
       columns: [
-        "a.*",
+        "a.id",
+        "a.status",
         "row_to_json(u) AS user",
         "row_to_json(e) AS event",
         "row_to_json(t) AS ticket",

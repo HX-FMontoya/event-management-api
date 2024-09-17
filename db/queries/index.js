@@ -5,6 +5,7 @@ const userQueries = require("./users");
 const attenderQueries = require("./attenders");
 const cityQueries = require("./cities");
 const ticketQueries = require("./tickets");
+const credentialQueries = require("./credentials");
 
 module.exports = {
   event: {
@@ -22,13 +23,14 @@ module.exports = {
   user: {
     getAll: userQueries.getAll(buildQuery),
     getById: userQueries.getById(buildQuery),
-    findUserByEmail: userQueries.findUserByEmail(buildQuery),
+    findByEmail: userQueries.findByEmail(buildQuery),
     create: userQueries.create(buildQuery),
     update: userQueries.update(buildQuery),
     deleteById: userQueries.deleteById(buildQuery),
   },
   attender: {
     getAll: attenderQueries.getAll(buildQuery),
+    getAllByEventId: attenderQueries.getAllByEventId(buildQuery),
     getById: attenderQueries.getById(buildQuery),
     create: attenderQueries.create(buildQuery),
     update: attenderQueries.update(buildQuery),
@@ -44,5 +46,9 @@ module.exports = {
     create: ticketQueries.create(buildQuery),
     update: ticketQueries.update(buildQuery),
     deleteById: ticketQueries.deleteById(buildQuery),
+  },
+  credential: {
+    create: credentialQueries.create(buildQuery),
+    findByUserId: credentialQueries.findByUserId(buildQuery)
   },
 };

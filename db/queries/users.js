@@ -14,7 +14,7 @@ module.exports = {
       conditions: ["id = $1"],
     }),
 
-  findUserByEmail: (buildQuery) =>
+  findByEmail: (buildQuery) =>
     buildQuery({
       type: "select",
       tableName: "users",

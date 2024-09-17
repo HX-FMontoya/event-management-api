@@ -9,6 +9,7 @@ module.exports = {
         "t.price",
         "t.purchase_date",
         "t.status",
+        "t.enabled_days",
         "row_to_json(u) AS user",
         "row_to_json(e) AS event",
       ],
@@ -27,6 +28,7 @@ module.exports = {
         "t.price",
         "t.purchase_date",
         "t.status",
+        "t.enabled_days",
         "row_to_json(u) AS user",
         "row_to_json(e) AS event",
       ],
@@ -40,16 +42,30 @@ module.exports = {
     buildQuery({
       type: "insert",
       tableName: "tickets",
-      columns: ["event_id", "user_id", "ticket_type", "price"],
-      values: ["event_id", "user_id", "ticket_type", "price"],
+      columns: [
+        "event_id",
+        "user_id",
+        "ticket_type",
+        "price",
+        "enabled_days",
+        "purchase_date",
+      ],
+      values: [
+        "event_id",
+        "user_id",
+        "ticket_type",
+        "price",
+        "enabled_days",
+        "purchase_date",
+      ],
     }),
   update: (buildQuery) =>
     buildQuery({
       type: "update",
       tableName: "tickets",
-      columns: ["event_id", "user_id", "ticket_type", "price"],
-      values: ["event_id", "user_id", "ticket_type", "price"],
-      conditions: ["id = $5"],
+      columns: ["event_id", "user_id", "ticket_type", "price", "enabled_days"],
+      values: ["event_id", "user_id", "ticket_type", "price", "enabled_days"],
+      conditions: ["id = $6"],
     }),
   deleteById: (buildQuery) =>
     buildQuery({
