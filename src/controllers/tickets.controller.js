@@ -29,7 +29,11 @@ module.exports = {
   update: catcherController(async (req, res) => {
     const { id } = req.params;
     const ticketData = req.body;
-    const updatedTicket = await ticketsService.update(id, ticketData);
+    const { id: userId } = req.user;
+    const updatedTicket = await ticketsService.update(id, {
+      ...ticketData,
+      user_id: userId,
+    });
     if (!updatedTicket) {
       return res.status(404).json({ message: "Ticket not found" });
     }
