@@ -12,6 +12,7 @@ module.exports = ({
 
   switch (type) {
     case "select":
+    case "selectOne":
       query = `SELECT ${columns.join(", ")} FROM ${tableName}`;
 
       if (joins.length > 0) {
@@ -26,6 +27,10 @@ module.exports = ({
 
       if (orderBy) {
         query += ` ORDER BY ${orderBy}`;
+      }
+
+      if (type === "selectOne") {
+        query += " LIMIT 1";
       }
 
       if (limit > 0) {
@@ -57,6 +62,5 @@ module.exports = ({
     default:
       throw new Error("Unsupported query type");
   }
-
   return query;
 };
