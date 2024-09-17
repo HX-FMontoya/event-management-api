@@ -8,14 +8,4 @@ module.exports = {
       }
     };
   },
-  genericCatcher: (cb) => {
-    return async (...args) => {
-      try {
-        return await cb(...args);
-      } catch (error) {
-        console.error(`Error in function: ${error.message}`);
-        throw error;
-      }
-    };
-  },
 };
