@@ -7,6 +7,7 @@ Esta es una API para la gestión de eventos, desarrollada en Node.js con Express
 ## Características
 - CRUD de eventos
 - Autenticación JWT
+- Dockerización para fácil despliegue
 
 ## Requisitos previos
 
@@ -14,6 +15,7 @@ Esta es una API para la gestión de eventos, desarrollada en Node.js con Express
 - **npm** o **yarn** para la gestión de dependencias
 - **PostgreSQL**: La base de datos utilizada es PostgreSQL.
 - **Git Bash (solo para Windows)**: Si estás en Windows y deseas ejecutar scripts Bash, asegúrate de tener instalado Git Bash [Descargar Git Bash](https://git-scm.com/).
+- **Docker y Docker Compose**: Para ejecutar la aplicación con Docker.
 
 ## Instalación
 
@@ -66,6 +68,33 @@ npm run setup-db-windows
 
 **Nota: Asegúrate de que Git Bash esté instalado en tu sistema si estás utilizando Windows.**
 
+## Docker
+### Ejecución con Docker
+Si prefieres correr la aplicación con Docker, sigue los siguientes pasos:
+
+1. Asegúrate de que Docker y Docker Compose estén instalados en tu sistema. Puedes descargar Docker desde Docker Desktop.
+
+2. Asegúrate de tener el archivo .env configurado, tal como se describe en la sección de instalación.
+
+3. Ejecuta el siguiente comando para levantar los contenedores:
+
+```bash
+docker-compose up
+```
+Este comando construirá y levantará tanto la aplicación como la base de datos PostgreSQL en contenedores Docker.
+
+Accede a la aplicación desde http://localhost:3000.
+
+### Docker Compose
+El archivo [docker-compose.yml](/event-management-api/docker-compose.yml) contiene la configuración necesaria para levantar la aplicación y la base de datos PostgreSQL en contenedores. Asegúrate de que Docker esté corriendo correctamente antes de ejecutar docker-compose up.
+
+Para detener los contenedores, puedes usar:
+
+```bash
+docker-compose down
+```
+Esto apagará y limpiará los contenedores en ejecución.
+
 ## Scripts disponibles
 ### Inicia la aplicación
 #### En modo producción:
@@ -105,15 +134,28 @@ En la carpeta docs encontrarás material complementario como:
   /src              
     /config         
     /controllers    
-    /middlewares    
+    /helpers
+    /infrastructure
+        /queries
+    /middlewares  
+        /auth
+        /core
+        /events
+        /permissions
+            /verify
+        /validations
+            /reservation
     /models         
     /routes         
     /services       
-    /utils          
+    /utils     
+    /validations     
     server.js       
   /test          
   .env.example   
   .gitignore
+  docker-compose.yml
+  Dockerfile
   eslint.config.mjs
   index.js   
   package-lock.json
