@@ -1,5 +1,5 @@
-const { pool } = require("../../db/db_conexion");
-const { credential } = require("../../db/queries");
+const { pool } = require("../infrastructure/db_conexion");
+const { credential } = require("../infrastructure/queries");
 
 module.exports = {
   createCredentials: async (credentialsData) => {

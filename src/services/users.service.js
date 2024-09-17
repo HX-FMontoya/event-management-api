@@ -1,6 +1,6 @@
 const { hashPassword, generateToken } = require("./auth.service");
-const { pool } = require("../../db/db_conexion");
-const { user, credential } = require("../../db/queries");
+const { pool } = require("../infrastructure/db_conexion");
+const { user, credential } = require("../infrastructure/queries");
 
 module.exports = {
   getAll: async () => {

@@ -1,5 +1,5 @@
-const { pool } = require("../../db/db_conexion");
-const { attender, ticket } = require("../../db/queries");
+const { pool } = require("../infrastructure/db_conexion");
+const { attender } = require("../infrastructure/queries");
 
 module.exports = {
   getAll: async () => {

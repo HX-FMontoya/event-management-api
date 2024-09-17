@@ -6,14 +6,34 @@ const {
   update,
   deleteById,
 } = require("../controllers/tickets.controller");
-const { validateTicket } = require("../middlewares/validations.middleware");
-const auth = require("../middlewares/auth.middleware");
-const { verifyAdmin, verifyAdminOrOrganizer } = require("../middlewares");
+const {
+  verifyAdmin,
+  verifyAdminOrOrganizer,
+  verifyResource,
+  auth,
+  validations,
+} = require("../middlewares");
+const { eventsService } = require("../services");
+const { validateTicket } = validations;
 
 router.get("/", auth, verifyAdmin, getAll);
-router.post("/", auth, verifyAdminOrOrganizer, validateTicket, create);
+router.post(
+  "/",
+  auth,
+  verifyResource(eventsService, "event"),
+  verifyAdminOrOrganizer,
+  validateTicket,
+  create
+);
 router.get("/:id", auth, getById);
-router.put("/:id", auth, verifyAdminOrOrganizer, validateTicket, update);
+router.put(
+  "/:id",
+  auth,
+  verifyResource(eventsService, "event"),
+  verifyAdminOrOrganizer,
+  validateTicket,
+  update
+);
 router.delete("/:id", auth, verifyAdminOrOrganizer, deleteById);
 
 module.exports = router;

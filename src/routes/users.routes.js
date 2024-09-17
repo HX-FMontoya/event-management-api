@@ -5,8 +5,7 @@ const {
   update,
   deleteById,
 } = require("../controllers/users.controller");
-const auth = require("../middlewares/auth.middleware");
-const { verifyAdmin, verifyWhoModifiesUser } = require("../middlewares");
+const { verifyAdmin, verifyWhoModifiesUser, auth } = require("../middlewares");
 
 router.get("/", auth, verifyAdmin, getAll);
 router.get("/:id", auth, verifyWhoModifiesUser, getById);

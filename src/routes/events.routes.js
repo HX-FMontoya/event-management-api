@@ -6,12 +6,13 @@ const {
   update,
   deleteById,
 } = require("../controllers/events.controller");
-const { validateEvent } = require("../middlewares/validations.middleware");
 const {
   verifyAdminOrOrganizer,
   auth,
   verifyWhoModifiesEvent,
+  validations,
 } = require("../middlewares");
+const { validateEvent } = validations;
 
 router.get("/", getAll);
 router.post("/", auth, verifyAdminOrOrganizer, validateEvent, create);

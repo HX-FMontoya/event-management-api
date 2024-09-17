@@ -1,5 +1,5 @@
-const { pool } = require("../../db/db_conexion");
-const { event } = require("../../db/queries");
+const { pool } = require("../infrastructure/db_conexion");
+const { event } = require("../infrastructure/queries");
 const { findOrCreateLocation } = require("../helpers");
 
 module.exports = {

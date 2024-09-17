@@ -1,11 +1,21 @@
 const router = require("express").Router();
 const { create } = require("../controllers/reservations.controllers");
 const {
-  validateReservation,
-} = require("../middlewares/validations.middleware");
-const { auth } = require("../middlewares");
-const { validateDaysForReservation } = require("../middlewares");
+  validations,
+  auth,
+  validateDaysForReservation,
+  verifyResource,
+} = require("../middlewares");
+const { eventsService } = require("../services");
+const { validateReservation } = validations;
 
-router.post("/", auth, validateDaysForReservation, validateReservation, create);
+router.post(
+  "/",
+  auth,
+  verifyResource(eventsService, "event"),
+  validateDaysForReservation,
+  validateReservation,
+  create
+);
 
 module.exports = router;
